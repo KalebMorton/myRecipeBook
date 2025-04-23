@@ -1,33 +1,35 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { Routes, Route, Link } from "react-router-dom";
+import Home from './components/Home';
+import AllRecipes from './components/allRecipes'
+import SignUpForm from './components/SignUpForm'
+import Favorites from './components/Favorites';
+import SignInForm from './components/SignInForm'
 import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
+  const [userData, setUserData] = useState(null);
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <h1>Recipe Book</h1>
+    {userData ? <>Welcome {userData.username}!</> : <>You are not signed in.</>}
+    <div id="navbar">
+    <Link to="/SignUp">Create New Account</Link>
+    <Link to="/SignIn">Log In</Link>
+    <Link to="/Recipes">Veiw Recipes</Link>
+    <Link to="/Favorites">Veiw Favorites</Link>
+    </div>
+    <div>
+      <Routes>
+        <Route path="/SignIn" element={<SignInForm setUserData={setUserData}/>} />
+        <Route path="/SignUp" element={<SignUpForm setUserData={setUserData}/>} />
+        <Route path="/Recipes" element={<AllRecipes userData={userData}/>} />
+        <Route path="/Favorites" element={<Favorites userData={userData}/>} />
+        <Route path="/" element={<Home/>} />
+      </Routes>
+    </div>
     </>
   )
 }

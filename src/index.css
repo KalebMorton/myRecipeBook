@@ -66,3 +66,15 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+#navbar {
+  justify-content: space-evenly;
+  height: 100%;
+  display: flex;
+}
+a {
+  padding: 10px;
+}
+#recipeListing{
+  display: flex;
+  justify-content: space-evenly;
+}
